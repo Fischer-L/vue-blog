@@ -9,7 +9,7 @@
 
 <script>
 import "bootstrap/scss/bootstrap.scss";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/subComponents/NavBar";
 
 export default {
   name: "App",
@@ -25,19 +25,25 @@ export default {
 
 @font-face{
   font-family: Playfair-B;
-  src: url(assets/fonts/PlayfairDisplay-Black.ttf);
+  src: url(assets/fonts/PlayfairDisplay-Black.ttf) format("truetype");
 }
 
 @font-face{
   font-family: PlexMono-L;
-  src: url(assets/fonts/IBMPlexMono-Light.woff2),
-       url(assets/fonts/IBMPlexMono-Light.woff);
+  src: url(assets/fonts/IBMPlexMono-Light.woff2) format("woff2"),
+       url(assets/fonts/IBMPlexMono-Light.woff) format("woff");
 }
 
 @font-face{
-  font-family: PlexMono-M;
-  src: url(assets/fonts/IBMPlexMono-Medium.woff2),
-       url(assets/fonts/IBMPlexMono-Medium.woff);
+  // font-family: PlexMono-M;
+  // src: url(assets/fonts/IBMPlexMono-Medium.woff2) format("woff2"),
+  //      url(assets/fonts/IBMPlexMono-Medium.woff) format("woff");
+}
+
+@font-face{
+  font-family: PlexMono-R;
+  src: url(assets/fonts/IBMPlexMono-Regular.woff2) format("woff2"),
+       url(assets/fonts/IBMPlexMono-Regular.woff) format("woff");
 }
 
 html {
@@ -45,7 +51,7 @@ html {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: PlexMono-R;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -54,7 +60,7 @@ html {
 
 #app-body {
   width: get-var("app-width");
-  max-width: get-var("app-width");
+  max-width: get-var("app-max-width");
   margin: 0 auto;
   margin-top: $app-nav-bar-height;
 }
@@ -66,13 +72,10 @@ html {
   text-decoration: none;
 }
 
-.app-font-PlexMono-M {
-  font-family: PlexMono-M;
-}
-
 @media screen and (min-width: $app-big-screen-width) {
   #app-body {
     width: get-var("app-width", "big");
+    max-width: get-var("app-max-width", "big");
   }
 }
 
