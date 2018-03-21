@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import "bootstrap/scss/bootstrap.scss";
 import NavBar from "./components/NavBar";
 
 export default {
@@ -21,7 +22,6 @@ export default {
 
 <style lang="scss">
 @import "assets/css/AppEnv";
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 @font-face{
   font-family: Playfair-B;
@@ -30,7 +30,14 @@ export default {
 
 @font-face{
   font-family: PlexMono-L;
-  src: url(assets/fonts/IBMPlexMono-Light.woff);
+  src: url(assets/fonts/IBMPlexMono-Light.woff2),
+       url(assets/fonts/IBMPlexMono-Light.woff);
+}
+
+@font-face{
+  font-family: PlexMono-M;
+  src: url(assets/fonts/IBMPlexMono-Medium.woff2),
+       url(assets/fonts/IBMPlexMono-Medium.woff);
 }
 
 html {
@@ -43,23 +50,24 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $app-color;
-  margin-top: 60px;
 }
 
 #app-body {
   width: get-var("app-width");
+  max-width: get-var("app-width");
   margin: 0 auto;
+  margin-top: $app-nav-bar-height;
 }
 
-.app-link {
-  color: unset;
-  text-decoration: none;
-}
-
+.app-link,
 .app-link:hover,
 .app-link:active {
   color: unset;
   text-decoration: none;
+}
+
+.app-font-PlexMono-M {
+  font-family: PlexMono-M;
 }
 
 @media screen and (min-width: $app-big-screen-width) {

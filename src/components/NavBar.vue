@@ -23,6 +23,7 @@ export default {
 @import "../assets/css/AppEnv";
 
 .navbar {
+  height: $app-nav-bar-height;
   background: $app-color;
 }
 
