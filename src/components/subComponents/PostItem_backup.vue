@@ -6,39 +6,49 @@
            v-bind:style="styleObject" />
       <div class="post-item-body text-left d-flex flex-wrap flex-column">
         <h6 class="post-item-title text-truncate">{{item.title}}</h6>
-        <AuthorBlock :author="item.author" :thumbnail="item.thumbnail" :time="item.time" />
+        <div class="post-item-sub-body d-flex justify-content-start align-items-center">
+          <img class="post-item-thumbnail rounded-circle"
+               v-bind:src="thumbnailLink"/>
+          <div class="post-item-info text-secondary">
+            <div class="post-item-info-text w-100">{{item.author}}</div>
+            <div class="post-item-info-text w-100">{{postTime}}</div>
+          </div>
+        </div>
       </div>
     </router-link>
   </div>
 </template>
 
 <script>
-import AuthorBlock from "./AuthorBlock";
 
 export default {
   name: "PostItem",
 
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    }
-  },
+  props: ["item"],
 
   data() {
+    let postTime = new Date(this.item.time);
+    postTime = new Date(
+      postTime.getTime() - postTime.getTimezoneOffset() * 60 * 1000);
+    postTime = postTime.toLocaleDateString({
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+
     // Encode URI for safety.
     let imgLink = encodeURI(this.item.img);
+    let thumbnailLink = encodeURI(this.item.thumbnail);
+
     return {
       styleObject: {
         backgroundImage: `url(${imgLink})`
       },
       postLink: `/posts/${this.item.id}`,
+      postTime,
+      thumbnailLink,
     }
   },
-
-  components: {
-    AuthorBlock
-  }
 }
 
 </script>
@@ -69,6 +79,25 @@ export default {
   height: 2.2em;
   font-size: 1.1em;
   white-space: unset;
+}
+
+.post-item-sub-body {
+  flex: 1;
+}
+
+.post-item-thumbnail {
+  width: 4em;
+  margin-right: 1em;
+}
+
+.post-item-info {
+  flex: 1;
+  font-size: 0.9em;
+}
+
+.post-item-info-text {
+  height: 1.2em;
+  overflow: hidden;
 }
 
 @media screen and (min-width: $app-big-screen-width) {

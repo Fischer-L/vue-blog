@@ -1,9 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-100">
     <NavBar />
-    <div id="app-body">
-      <router-view/>
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -46,7 +44,8 @@ export default {
        url(assets/fonts/IBMPlexMono-Regular.woff) format("woff");
 }
 
-html {
+html, body {
+  height: 100%;
   font-size: 16px;
 }
 
@@ -58,9 +57,10 @@ html {
   color: $app-color;
 }
 
-#app-body {
+.app-content-area {
   width: get-var("app-width");
   max-width: get-var("app-max-width");
+  padding-bottom: 10em;
   margin: 0 auto;
   margin-top: $app-nav-bar-height;
 }
@@ -73,7 +73,7 @@ html {
 }
 
 @media screen and (min-width: $app-big-screen-width) {
-  #app-body {
+  .app-content-area {
     width: get-var("app-width", "big");
     max-width: get-var("app-max-width", "big");
   }

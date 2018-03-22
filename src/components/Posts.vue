@@ -1,5 +1,5 @@
 <template>
-  <div id="app-posts">
+  <div id="app-posts" class="app-content-area">
     <h1 class="app-posts-header text-left">Articles</h1>
     <PostListContainer :postList="postList"/>
   </div>
