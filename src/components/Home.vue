@@ -1,7 +1,8 @@
 <template>
   <div id="app-home" class="vueBlog-content-area">
-    <PromoPostsContainer :promoPosts="promoPosts" />
-    <PostListContainer :postList="postList"/>
+    <PromoPostsContainer v-if="promoPosts.length > 0" :promoPosts="promoPosts" />
+    <h3 class="vueBlog-section-header text-left">Populars</h3>
+    <PostListContainer v-if="postList.length > 0" :postList="postList"/>
   </div>
 </template>
 
@@ -14,47 +15,9 @@ export default {
   name: "Home",
 
   data() {
-    
     return {
-      promoPosts: [
-        {
-          id: "1",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg"
-        },
-        {
-          id: "2",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg"
-        }
-      ],
-
-      postList: [
-        {
-          id: "1",
-          author: "Ami Carey",
-          time: 1521428435336,
-          thumbnail: "../../static/author_0.png",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-        },
-        {
-          id: "2",
-          author: "Joel Searby",
-          time: 1521428435336,
-          thumbnail: "../../static/author_1.jpg",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-        },
-        {
-          id: "3",
-          author: "Ami Carey",
-          time: 1521428435336,
-          thumbnail: "../../static/author_0.png",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-        }
-      ],
+      promoPosts: [],
+      postList: [],
     };
   },
 
@@ -63,10 +26,62 @@ export default {
     PostListContainer
   },
 
+  methods: {
+
+    _fetchData(type) {
+      if (!this._fetchPromises) {
+        this._fetchPromises = {};
+      }
+      // If there are promises, already fetching,
+      // so proceed when there aren't.
+      if ((type === "postList" && !this._fetchPromises.postList) ||
+          (type === "promoPosts" && !this._fetchPromises.promoPosts)) {
+        this._fetchPromises[type] = new Promise(async resolve => {
+          let data = await appData.get(type);
+          if (!data) {
+            resolve([]);
+          } else {
+            resolve(data);
+          }
+        });
+      }
+    },
+
+    _updateData(type) {
+      if (!this._fetchPromises) {
+        return;
+      }
+
+      if ((type === "postList" && this._fetchPromises.postList) ||
+          (type === "promoPosts" && this._fetchPromises.promoPosts)) {
+        window.requestAnimationFrame(async () => {
+          this[type] = await this._fetchPromises[type];
+          this._fetchPromises[type] = null;
+        });
+      }
+    },
+  },
+
   // Life cyle listeners
+
+  beforeCreate() {
+    // Make sure a right start position
+    window.scrollTo(0, 0);
+  },
   
   created() {
-    console.log("CRRRRR");
+    // We go fetching data once our component is created,
+    // but don't update the fected data right away so
+    // we don't block the Vue component's lifecycle or
+    // cause unexpected props error.
+    this._fetchData("postList");
+    this._fetchData("promoPosts");
+  },
+
+  mounted() {
+    // We try to update the fected data when our component is ready.
+    this._updateData("postList");
+    this._updateData("promoPosts");
   },
 
   // Life cyle listeners end

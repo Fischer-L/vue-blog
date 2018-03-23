@@ -4,18 +4,21 @@ import * as dummy from "../../static/dummyData.js";
 // Currently, mainly, the data is posts.
 const appData = {
   _get(key, params = {}) {
-
     let data = null;
     switch (key) {
       case "post":
         let id = params.id;
-        // id = "0"; // TMP
         if (id) {
           let post = dummy.posts.find(post => post.id === id);  
           if (post) {
             data = Object.assign({}, post);
           }
         }
+        break;
+
+      case "postList":
+      case "promoPosts":
+        data = dummy[key].map(item => Object.assign({}, item));
         break;
     }
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app-posts" class="vueBlog-content-area">
-    <h1 class="app-posts-header text-left">Articles</h1>
+    <h2 class="vueBlog-section-header text-left">Articles</h2>
     <PostListContainer :postList="postList"/>
   </div>
 </template>
@@ -50,18 +50,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import "../assets/css/AppEnv";
-
-.app-posts-header {
-  padding: 0.6em 0 0.5em 1em;
-  margin: 0;
-  border-bottom: 1px solid $app-border-color;
-}
-
-@media screen and (min-width: $app-big-screen-width) {
-  .app-posts-header {
-    padding: 1em 0;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

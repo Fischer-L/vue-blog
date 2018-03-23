@@ -2,9 +2,9 @@
   <nav class="navbar navbar-expand-md fixed-top">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item nav-item-main">
-        <router-link to="/" class="app-link">VueBlog</router-link>
+        <router-link to="/" class="vueBlog-app-link">VueBlog</router-link>
       </li>
-      <router-link to="/posts" class="app-link">
+      <router-link to="/posts" class="vueBlog-app-link">
         <li class="nav-item nav-item-posts align-middle">
           Posts
         </li>

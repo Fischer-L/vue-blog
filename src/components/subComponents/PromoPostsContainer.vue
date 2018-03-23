@@ -1,8 +1,8 @@
 <template>
-    <div class="promo-posts-container swiper-container">
+    <div class="vueBlog-promo-posts-container swiper-container">
       <div class="swiper-wrapper">
         <PromoPost v-for="(post, index) in this.promoPosts" 
-                     :img="post.img" :title="post.title" :key="index"
+                     :id="post.id" :title="post.title" :mainImg="post.mainImg" :key="index"
         ></PromoPost>
       </div>
       <div class="swiper-pagination"></div>
@@ -20,9 +20,12 @@ import PromoPost from "./PromoPost"
 export default {
   name: "PromoPostsContainer",
 
-  props: [
-    "promoPosts"
-  ],
+  props: {
+    promoPosts: {
+      type: Array,
+      required: true
+    }
+  },
 
   components: {
     PromoPost

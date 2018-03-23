@@ -1,5 +1,5 @@
 <template>
-  <div id="post-list-container" class="w-100 d-flex justify-content-sm-between align-items-start flex-wrap">
+  <div class="vueBlog-post-list-container w-100 d-flex justify-content-sm-between align-items-start flex-wrap">
     <PostItem v-for="(item, index) in this.postList" 
                 :item="item" :key="index"
     ></PostItem>
@@ -13,7 +13,12 @@ import PostItem from "./PostItem";
 export default {
   name: 'PostListContainer',
 
-  props: ["postList"],
+  props: {
+    postList: {
+      type: Array,
+      required: true
+    }
+  },
 
   components: {
     PostItem

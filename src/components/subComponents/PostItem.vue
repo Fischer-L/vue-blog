@@ -1,11 +1,11 @@
 <template>
-  <div class="post-item d-flex">
-    <router-link class="app-link w-100 h-100 d-flex flex-wrap flex-column"
+  <div class="vueBlog-post-item d-flex">
+    <router-link class="vueBlog-app-link w-100 h-100 d-flex flex-wrap flex-column"
                  v-bind:to="postLink">
-      <img class="post-item-img w-100 d-block" 
+      <img class="vueBlog-post-item-img w-100 d-block" 
            v-bind:style="styleObject" />
-      <div class="post-item-body text-left d-flex flex-wrap flex-column">
-        <h6 class="post-item-title text-truncate">{{item.title}}</h6>
+      <div class="vueBlog-post-item-body text-left d-flex flex-wrap flex-column">
+        <h6 class="vueBlog-post-item-title text-truncate">{{item.title}}</h6>
         <AuthorBlock :author="item.author" :thumbnail="item.thumbnail" :time="item.time" />
       </div>
     </router-link>
@@ -27,7 +27,7 @@ export default {
 
   data() {
     // Encode URI for safety.
-    let imgLink = encodeURI(this.item.img);
+    let imgLink = encodeURI(this.item.mainImg);
     return {
       styleObject: {
         backgroundImage: `url(${imgLink})`
@@ -46,7 +46,7 @@ export default {
 <style scoped lang="scss">
 @import "../../assets/css/AppEnv";
 
-.post-item {
+.vueBlog-post-item {
   width: 100%;
   height: 20em;
   border: 1px solid $app-border-color;
@@ -54,34 +54,34 @@ export default {
   background: #fff;
 }
 
-.post-item-img {
+.vueBlog-post-item-img {
   height: 55%;
   border-radius: 0;
   background: center/cover no-repeat;
 }
 
-.post-item-body {
+.vueBlog-post-item-body {
   flex: 1;
   padding: 0.8em 1.2em 0.3em 1.2em;
 }
 
-.post-item-title {
+.vueBlog-post-item-title {
   height: 2.2em;
   font-size: 1.1em;
   white-space: unset;
 }
 
 @media screen and (min-width: $app-big-screen-width) {
-  .post-item {
+  .vueBlog-post-item {
     width: 45%;
     border-radius: 2px;
   }
 
-  .post-item-body {
+  .vueBlog-post-item-body {
     padding: 0.8em 0.8em 0.3em 0.8em;
   }
 
-  .post-item-img {
+  .vueBlog-post-item-img {
     border-radius: 2px 2px 0 0;
   }
 }

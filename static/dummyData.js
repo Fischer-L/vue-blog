@@ -82,5 +82,34 @@ const posts = [
   },
 ];
 
+const postList = posts.map(post => {
+  let {
+    id,
+    author,
+    time,
+    thumbnail,
+    title,
+    mainImg,
+  } = post;
+  return {
+    id,
+    author,
+    time,
+    thumbnail,
+    title,
+    mainImg,
+  };
+});
 
-export { posts };
+const promoPosts = posts.reduce((promoPosts, post) => {
+  if (promoPosts.length < 3) {
+    promoPosts.push({
+      id: post.id,
+      title: post.title,
+      mainImg: post.mainImg
+    });
+  }
+  return promoPosts;
+}, []);
+
+export { posts, postList, promoPosts };

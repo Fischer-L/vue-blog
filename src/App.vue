@@ -13,7 +13,14 @@ export default {
   name: "App",
   components: {
     NavBar
-  }
+  },
+
+  // Life cyle listeners
+  beforeCreate() {
+    // Make sure a right start position
+    window.scrollTo(0, 0);
+  },
+  // Life cyle listeners end
 };
 
 </script>
@@ -30,12 +37,6 @@ export default {
   font-family: PlexMono-L;
   src: url(assets/fonts/IBMPlexMono-Light.woff2) format("woff2"),
        url(assets/fonts/IBMPlexMono-Light.woff) format("woff");
-}
-
-@font-face{
-  // font-family: PlexMono-M;
-  // src: url(assets/fonts/IBMPlexMono-Medium.woff2) format("woff2"),
-  //      url(assets/fonts/IBMPlexMono-Medium.woff) format("woff");
 }
 
 @font-face{
@@ -65,17 +66,27 @@ html, body {
   margin-top: $app-nav-bar-height;
 }
 
-.app-link,
-.app-link:hover,
-.app-link:active {
+.vueBlog-app-link,
+.vueBlog-app-link:hover,
+.vueBlog-app-link:active {
   color: unset;
   text-decoration: none;
+}
+
+.vueBlog-section-header {
+  padding: 0.6em 0 0.5em 1em;
+  margin: 0;
+  border-bottom: 1px solid $app-border-color;
 }
 
 @media screen and (min-width: $app-big-screen-width) {
   .vueBlog-content-area {
     width: get-var("app-width", "big");
     max-width: get-var("app-max-width", "big");
+  }
+
+  .vueBlog-section-header {
+    padding: 1em 0;
   }
 }
 
