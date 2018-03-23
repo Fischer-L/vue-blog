@@ -19,18 +19,18 @@ export default {
 
   // The render template:
   // <template>
-  //   <article class="article">
-  //     <section class="article-header text-left">
+  //   <article class="vueBlog-article">
+  //     <section class="vueBlog-article-header text-left">
   //       <AuthorBlock :author="" :thumbnail="" :time="" />
-  //       <h2 class="article-header-title text-truncate"></h2>
+  //       <h2 class="vueBlog-article-header-title text-truncate"></h2>
   //     </section>
-  //     <img class="article-main-img w-100 d-block" v-bind:style="background-img" />
-  //     <section class="article-body text-left">
-  //       <p class="article-body-p">
+  //     <img class="vueBlog-article-main-img w-100 d-block" v-bind:style="background-img" />
+  //     <section class="vueBlog-article-body text-left">
+  //       <p class="vueBlog-article-body-p">
   //         <span class="align-text-top"></span>
-  //         <a class="article-link align-text-top" href=''></a>
+  //         <a class="vueBlog-article-link align-text-top" href=''></a>
   //       </p>
-  //       <img class="article-body-img" src='' />
+  //       <img class="vueBlog-article-body-img" src='' />
   //     </section>
   //   </article>
   render(createElement) {
@@ -39,7 +39,7 @@ export default {
     let body = this._renderArticleBody(this.post, createElement);
     return createElement("article", {
       attrs: {
-        class: "article"
+        class: "vueBlog-article"
       }
     }, [ header, mainImg, body ]);
   },
@@ -55,7 +55,7 @@ export default {
       });
       let title = createElement("h2", {
         attrs: {
-          class: "article-header-title text-truncate"
+          class: "vueBlog-article-header-title text-truncate"
         },
         domProps: {
           textContent: post.title
@@ -63,7 +63,7 @@ export default {
       });
       return createElement("section", {
         attrs: {
-          class: "article-header text-left"
+          class: "vueBlog-article-header text-left"
         }
       }, [ authorBlock, title ]);
     },
@@ -71,7 +71,7 @@ export default {
     _renderMainImg(post, createElement) {
       return createElement("img", {
         attrs: {
-          class: "article-main-img w-100 d-block"
+          class: "vueBlog-article-main-img w-100 d-block"
         },
         style: {
           backgroundImage: `url(${encodeURI(post.mainImg)})`
@@ -89,7 +89,7 @@ export default {
           case "img":
             children.push(createElement("img", {
               attrs: {
-                class: "article-body-img",
+                class: "vueBlog-article-body-img",
                 src: encodeURI(elm.src)
               }
             }));
@@ -103,7 +103,7 @@ export default {
 
       return createElement("section", {
         attrs: {
-          class: "article-body text-left"
+          class: "vueBlog-article-body text-left"
         }
       }, children);
     },
@@ -122,7 +122,7 @@ export default {
             children.push(createElement("a", {
               attrs: {
                 href: encodeURI(elm.href),
-                class: "article-link  align-text-top",
+                class: "vueBlog-article-link  align-text-top",
               },
               domProps: {
                 textContent: elm.textContent
@@ -145,7 +145,7 @@ export default {
 
       return createElement("p", {
         attrs: {
-          class: "article-body-p"
+          class: "vueBlog-article-body-p"
         }
       }, children);
     },
@@ -155,38 +155,38 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.article-body,
-.article-header {
+.vueBlog-article-body,
+.vueBlog-article-header {
   padding: 1.5em;
 }
 
-.article-header-title {
+.vueBlog-article-header-title {
   margin: 0.5em 0 0 0;
   white-space: normal;
 }
 
-.article-main-img {
+.vueBlog-article-main-img {
   height: 25em;
   background: center/cover no-repeat;
 }
 
-.article-body-img {
+.vueBlog-article-body-img {
   max-width: 100%;
   margin: 1.8em 0;
 }
 
-.article-body-p {
+.vueBlog-article-body-p {
   margin: 1.2em 0;
 }
 
-.article-body-p:first-child::first-letter {
+.vueBlog-article-body-p:first-child::first-letter {
   font-size: 5em;
   float: left;
 }
 
-.article-link,
-.article-link:hover,
-.article-link:active {
+.vueBlog-article-link,
+.vueBlog-article-link:hover,
+.vueBlog-article-link:active {
   color: unset;
   text-decoration: underline;
 }
