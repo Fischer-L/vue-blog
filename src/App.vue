@@ -57,7 +57,7 @@ html, body {
   color: $app-color;
 }
 
-.app-content-area {
+.vueBlog-content-area {
   width: get-var("app-width");
   max-width: get-var("app-max-width");
   padding-bottom: 10em;
@@ -73,7 +73,7 @@ html, body {
 }
 
 @media screen and (min-width: $app-big-screen-width) {
-  .app-content-area {
+  .vueBlog-content-area {
     width: get-var("app-width", "big");
     max-width: get-var("app-max-width", "big");
   }

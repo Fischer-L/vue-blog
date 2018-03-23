@@ -1,4 +1,4 @@
-import postData from "../../static/postData.js";
+import * as dummy from "../../static/dummyData.js";
 
 // this `appData` in charge of providing the data for our app's use.
 // Currently, mainly, the data is posts.
@@ -9,9 +9,9 @@ const appData = {
     switch (key) {
       case "post":
         let id = params.id;
-        id = "0"; // TMP
+        // id = "0"; // TMP
         if (id) {
-          let post = postData.find(post => post.id === id);  
+          let post = dummy.posts.find(post => post.id === id);  
           if (post) {
             data = Object.assign({}, post);
           }

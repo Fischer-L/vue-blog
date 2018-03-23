@@ -89,7 +89,7 @@ export default {
           case "img":
             children.push(createElement("img", {
               attrs: {
-                class: "vueBlog-article-body-img",
+                class: "vueBlog-article-body-img d-block",
                 src: encodeURI(elm.src)
               }
             }));
@@ -172,7 +172,7 @@ export default {
 
 .vueBlog-article-body-img {
   max-width: 100%;
-  margin: 1.8em 0;
+  margin: 1.8em auto;
 }
 
 .vueBlog-article-body-p {

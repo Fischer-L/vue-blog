@@ -1,11 +1,11 @@
 <template>
   <div id="app-post">
-    <section class="app-post-article app-content-area">
+    <section class="app-post-article vueBlog-content-area">
       <Article v-if="!!post === true" :post="post"></Article>
       <div v-else>No Article</div>
     </section>
     <footer class="app-post-footer">
-      <div class="app-content-area">
+      <div class="vueBlog-content-area">
         <PostListContainer :postList="postList"/>
       </div>
     </footer>

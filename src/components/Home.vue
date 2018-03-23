@@ -1,5 +1,5 @@
 <template>
-  <div id="app-home" class="app-content-area">
+  <div id="app-home" class="vueBlog-content-area">
     <PromoPostsContainer :promoPosts="promoPosts" />
     <PostListContainer :postList="postList"/>
   </div>
