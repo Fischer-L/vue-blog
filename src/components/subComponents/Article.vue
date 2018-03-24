@@ -184,6 +184,7 @@ export default {
 }
 
 .vueBlog-article-body-p:first-child::first-letter {
+  line-height: 0.5em;
   font-size: 5em;
   float: left;
 }

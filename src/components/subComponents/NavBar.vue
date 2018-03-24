@@ -1,11 +1,11 @@
 <template>
   <nav class="vueBlog-navbar navbar navbar-expand-md fixed-top">
-    <ul class="vueBlog-navbar-nav navbar-nav mr-auto">
+    <ul class="vueBlog-navbar-nav navbar-nav mr-auto position-relative">
       <li class="vueBlog-nav-item vueBlog-nav-item-main nav-item nav-item-main">
         <router-link to="/" class="vueBlog-app-link vueBlog-font-logo">VueBlog</router-link>
       </li>
       <router-link to="/posts" class="vueBlog-app-link">
-        <li class="vueBlog-nav-item vueBlog-nav-item-posts nav-item nav-item-posts align-middle">
+        <li class="vueBlog-nav-item vueBlog-nav-item-posts nav-item nav-item-posts align-middle position-absolute">
           Posts
         </li>
       </router-link>
@@ -33,7 +33,6 @@ export default {
 .vueBlog-navbar-nav {
   width: get-var("app-width");
   margin: 0 auto;
-  position: relative;
 }
 
 .vueBlog-nav-item {
@@ -49,16 +48,16 @@ export default {
 }
 
 .vueBlog-nav-item-posts {
+  $vueBlog-nav-item-posts-color: #e5e5e5;
   width: 4em;
   height: $app-nav-bar-height * 0.55;
   line-height: $app-nav-bar-height * 0.55;
   padding: 0px 10px;
   border-radius: 4px;
-  border: 1px solid #e5e5e5;
-  color: #e5e5e5;
+  border: 1px solid $vueBlog-nav-item-posts-color;
+  color: $vueBlog-nav-item-posts-color;
   font-family: PlexMono-L;
   font-size: 0.9em;
-  position: absolute;
   right: 1em;
   top: 50%;
   // Need a bit visual compensation to make it
