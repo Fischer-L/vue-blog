@@ -1,10 +1,10 @@
 <template>
-  <div class="author-block text-left  d-flex justify-content-start align-items-center">
-    <img class="author-block-thumbnail rounded-circle"
+  <div class="vueBlog-author-block text-left  d-flex justify-content-start align-items-center">
+    <img class="vueBlog-author-block-thumbnail rounded-circle"
          v-bind:src="thumbnailLink"/>
-    <div class="author-block-info text-secondary">
-      <div class="author-block-info-text w-100">{{author}}</div>
-      <div class="author-block-info-text w-100">{{postTime}}</div>
+    <div class="vueBlog-author-block-info text-secondary">
+      <div class="vueBlog-author-block-info-text w-100">{{author}}</div>
+      <div class="vueBlog-author-block-info-text w-100">{{postTime}}</div>
     </div>
   </div>
 </template>
@@ -53,22 +53,22 @@ export default {
 
 <style scoped lang="scss">
 
-.author-block {
+.vueBlog-author-block {
   flex: 1;
 }
 
-.author-block-thumbnail {
+.vueBlog-author-block-thumbnail {
   width: 4em;
   min-height: 4em;
   margin-right: 1em;
 }
 
-.author-block-info {
+.vueBlog-author-block-info {
   flex: 1;
   font-size: 0.9em;
 }
 
-.author-block-info-text {
+.vueBlog-author-block-info-text {
   height: 1.2em;
   overflow: hidden;
 }

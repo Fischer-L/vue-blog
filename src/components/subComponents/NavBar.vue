@@ -1,11 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-md fixed-top">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item nav-item-main">
+  <nav class="vueBlog-navbar navbar navbar-expand-md fixed-top">
+    <ul class="vueBlog-navbar-nav navbar-nav mr-auto">
+      <li class="vueBlog-nav-item vueBlog-nav-item-main nav-item nav-item-main">
         <router-link to="/" class="vueBlog-app-link">VueBlog</router-link>
       </li>
       <router-link to="/posts" class="vueBlog-app-link">
-        <li class="nav-item nav-item-posts align-middle">
+        <li class="vueBlog-nav-item vueBlog-nav-item-posts nav-item nav-item-posts align-middle">
           Posts
         </li>
       </router-link>
@@ -24,23 +24,23 @@ export default {
 <style scoped lang="scss">
 @import "../../assets/css/AppEnv";
 
-.navbar {
+.vueBlog-navbar {
   height: $app-nav-bar-height;
   padding: 0;
   background: $app-color;
 }
 
-.navbar-nav {
+.vueBlog-navbar-nav {
   width: get-var("app-width");
   margin: 0 auto;
   position: relative;
 }
 
-.nav-item {
+.vueBlog-nav-item {
   color: #fff;
 }
 
-.nav-item-main {
+.vueBlog-nav-item-main {
   width: 6em;
   height: $app-nav-bar-height * 0.7;
   line-height: $app-nav-bar-height * 0.7;
@@ -49,7 +49,7 @@ export default {
   font-family: Playfair-B;
 }
 
-.nav-item-posts {
+.vueBlog-nav-item-posts {
   width: 4em;
   height: $app-nav-bar-height * 0.55;
   line-height: $app-nav-bar-height * 0.55;
@@ -68,7 +68,7 @@ export default {
 }
 
 @media screen and (min-width: $app-big-screen-width) {
-  .navbar-nav {
+  .vueBlog-navbar-nav {
     width: get-var("app-width", "big");
   }
 }
