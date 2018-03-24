@@ -1,52 +1,63 @@
 <template>
   <div id="app-posts" class="vueBlog-content-area">
     <h2 class="vueBlog-section-header text-left">Articles</h2>
-    <PostListContainer :postList="postList"/>
+    <PostListContainer v-if="postList.length > 0" :postList="postList"/>
   </div>
 </template>
 
 <script>
 import PostListContainer from "./subComponents/PostListContainer";
+import appData from "../tools/appData";
+
+// See the Home component for why a dataFetcher object.
+const dataFetcher = {
+  fetchPostList() {
+    if (!this.postListPromise) {
+      this.postListPromise = new Promise(async resolve => {
+        let data = await appData.get("postList");
+        if (!data) {
+          resolve([]);
+        } else {
+          resolve(data);
+        }
+      });
+    }
+    return this.postListPromise;
+  },
+};
 
 export default {
   name: 'Posts',
   data() {
     return {
-      postList: [
-        {
-          id: "1",
-          author: "Ami Carey",
-          time: 1521428435336,
-          thumbnail: "../../static/author_0.png",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-          summary: `Sometime late last year I realized that I wanted my ordinary bathroom mirror to be more like the future we were promised in the movies. There doesn’t seem to be anyone selling the product I was looking for. The individual parts, however, were fairly easy to get. A number of people have done similar custom builds recently, but I had something different in mind. So I ordered myself a two-way mirror, a display panel and controller board, plus a bunch of components and arts & crafts supplies. In reality there was quite a bit of experimentation and some dead ends before I got to this set of parts, but let’s have a look at the finished — yet by no means final—result.`
-        },
-        {
-          id: "2",
-          author: "Joel Searby",
-          time: 1521428435336,
-          thumbnail: "../../static/author_1.jpg",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-          summary: `Sometime late last year I realized that I wanted my ordinary bathroom mirror to be more like the future we were promised in the movies. There doesn’t seem to be anyone selling the product I was looking for. The individual parts, however, were fairly easy to get. A number of people have done similar custom builds recently, but I had something different in mind. So I ordered myself a two-way mirror, a display panel and controller board, plus a bunch of components and arts & crafts supplies. In reality there was quite a bit of experimentation and some dead ends before I got to this set of parts, but let’s have a look at the finished — yet by no means final—result.`
-        },
-        {
-          id: "3",
-          author: "Ami Carey",
-          time: 1521428435336,
-          thumbnail: "../../static/author_0.png",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-          summary: `Sometime late last year I realized that I wanted my ordinary bathroom mirror to be more like the future we were promised in the movies. There doesn’t seem to be anyone selling the product I was looking for. The individual parts, however, were fairly easy to get. A number of people have done similar custom builds recently, but I had something different in mind. So I ordered myself a two-way mirror, a display panel and controller board, plus a bunch of components and arts & crafts supplies. In reality there was quite a bit of experimentation and some dead ends before I got to this set of parts, but let’s have a look at the finished — yet by no means final—result.`
-        }
-      ],
+      postList: []
     };
   },
 
   components: {
     PostListContainer
   },
+
+  // Life cyle listeners
+
+  beforeCreate() {
+    // Make sure a right start position
+    window.scrollTo(0, 0);
+    // We go fetching data as early as possible,
+    // but don't update the fected data right away so
+    // we don't block the Vue component's lifecycle or
+    // cause unexpected props error.
+    dataFetcher.fetchPostList();
+  },
+
+  mounted() {
+    // We try to update the fected data when our component is ready.
+    window.requestAnimationFrame(async () => {
+      this.postList = await dataFetcher.postListPromise;
+    });
+  },
+
+  // Life cyle listeners end
 }
 </script>
 

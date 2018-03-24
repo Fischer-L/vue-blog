@@ -1,10 +1,10 @@
 <template>
   <div id="app-post">
-    <section class="app-post-article vueBlog-content-area">
+    <section class="vueBlog-article vueBlog-content-area">
       <Article v-if="!!post === true" :post="post"></Article>
       <div v-else>No Article</div>
     </section>
-    <footer class="app-post-footer">
+    <footer class="vueBlog-post-footer">
       <div class="vueBlog-content-area">
         <PostListContainer :postList="postList"/>
       </div>
@@ -17,6 +17,41 @@ import Article from "./subComponents/Article";
 import PostListContainer from "./subComponents/PostListContainer";
 import appData from "../tools/appData";
 import postBodyParser from "../tools/postBodyParser";
+
+// See the Home component for why a dataFetcher object.
+const dataFetcher = {
+  postListPromise: null,
+
+  fetchPostList() {
+    if (!this.postListPromise) {
+      this.postListPromise = new Promise(async resolve => {
+        let data = await appData.get("postList");
+        if (!data) {
+          resolve([]);
+        } else {
+          resolve(data);
+        }
+      });
+    }
+    return this.postListPromise;
+  },
+
+  postPromise: {},
+
+  fetchPost(id) {
+    if (!this.postPromise[id]) {
+      this.postPromise[id] = new Promise(async resolve => {
+        let data = await appData.get("post", { id });
+        if (!data) {
+          resolve(null);
+        } else {
+          resolve(data);
+        }
+      });
+    }
+    return this.postPromise[id];
+  },
+};
 
 export default {
   name: 'Post',
@@ -31,33 +66,7 @@ export default {
   data() {
     return {
       post: null,
-
-      postList: [
-        // {
-        //   id
-        //   author
-        //   time
-        //   thumbnail
-        //   title
-        //   img
-        // }
-        {
-          id: "1",
-          author: "Ami Carey",
-          time: 1521428435336,
-          thumbnail: "../../static/author_0.png",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-        },
-        {
-          id: "2",
-          author: "Joel Searby",
-          time: 1521428435336,
-          thumbnail: "../../static/author_1.jpg",
-          title: "My Bathroom Mirror Is Smarter Than Yours",
-          img: "../../static/post_1_main.jpg",
-        },
-      ],
+      postList: [],
     };
   },
 
@@ -66,41 +75,38 @@ export default {
     PostListContainer
   },
 
-  methods: {
-    _fetchPost(id) {
-      if (this._fetchPostPromise) {
-        return; // Already fectching
-      }
-      this._fetchPostPromise = new Promise(async resolve => {
-        let postData = await appData.get("post", { id : this.id });
-        if (!postData) {
-          resolve(null);
-        } else {
-          resolve(postData);
-        }
-      });
-    },
+  // Life cyle listeners
+
+  beforeCreate() {
+    // Make sure a right start position
+    window.scrollTo(0, 0);
+    // We go fetching data as early as possible,
+    // but don't update the fected data right away so
+    // we don't block the Vue component's lifecycle or
+    // cause unexpected props error.
+    dataFetcher.fetchPostList();
   },
 
-  // Life cyle listeners
-  
   created() {
-    this._fetchPost(this.id);
+    // Must wait until the created event
+    // because we need the id prop so know which post to fetch.
+    dataFetcher.fetchPost(this.id);
   },
 
   mounted() {
-    if (this._fetchPostPromise) {
-      window.requestAnimationFrame(async () => {
-        let postData = await this._fetchPostPromise;
-        if (postData) {
-          let article = await postBodyParser.parse(postData.body);
-          if (article) {
-            this.post = Object.assign({ article }, postData);
-          }
+    // We try to update the fected data when our component is ready.
+    window.requestAnimationFrame(async () => {
+      this.postList = await dataFetcher.postListPromise;
+    });
+    window.requestAnimationFrame(async () => {
+      let postData = await dataFetcher.postPromise[this.id];
+      if (postData) {
+        let article = await postBodyParser.parse(postData.body);
+        if (article) {
+          this.post = Object.assign({ article }, postData);
         }
-        this._fetchPostPromise = null;
-      });
-    }
+      }
+    });
   },
 
   // Life cyle listeners end
@@ -109,7 +115,7 @@ export default {
 
 <style scoped lang="scss">
 
-.app-post-footer {
+.vueBlog-post-footer {
   background: #f9f9f9;
 }
 

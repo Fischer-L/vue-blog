@@ -3,7 +3,9 @@ import * as dummy from "../../static/dummyData.js";
 // this `appData` in charge of providing the data for our app's use.
 // Currently, mainly, the data is posts.
 const appData = {
-  _get(key, params = {}) {
+  _fetchingPromise: {},
+
+  _fetch(key, params = {}) {
     let data = null;
     switch (key) {
       case "post":
@@ -30,7 +32,7 @@ const appData = {
       // `requestIdleCallback` fits us more in this case
       // but it got less support than `requestAnimationFrame` so...
       window.requestAnimationFrame(() => {
-        let data = this._get(key, params);
+        let data = this._fetch(key, params);
         if (data) {
           resolve(data);
         } else {
