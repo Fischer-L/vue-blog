@@ -1,5 +1,6 @@
 <script>
 import AuthorBlock from "./AuthorBlock";
+import { getBestFitMainImg } from "../../tools/utils";
 
 export default {
   // Actually this component represents a *post*, however,
@@ -69,12 +70,13 @@ export default {
     },
 
     _renderMainImg(post, createElement) {
+      let url = getBestFitMainImg(window, post.mainImg);
       return createElement("img", {
         attrs: {
           class: "vueBlog-article-main-img w-100 d-block"
         },
         style: {
-          backgroundImage: `url(${encodeURI(post.mainImg)})`
+          backgroundImage: `url(${encodeURI(url)})`
         }
       });
     },

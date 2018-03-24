@@ -8,6 +8,10 @@ function doItLater(task) {
   later(task);
 }
 
+function nonEmptyString(s) {
+  return s && typeof s === "string";
+}
+
 // OK, we only save posts locally, why?
 // Posts shouldn't change once written. They are static.
 // However, the post list and the promotion posts may be changed
@@ -44,25 +48,37 @@ postsDB.init();
 // this `appData` in charge of providing the data for our app's use.
 // Currently, mainly, the data is posts.
 const appData = {
+
   _sanitizePromoPost(data) {
     let cleanData = {};
 
-    if (data.id && typeof data.id === "string") {
+    if (nonEmptyString(data.id)) {
       cleanData.id = data.id;
     } else {
       cleanData = null;
     }
 
-    if (cleanData &&
-        data.title && typeof data.title === "string") {
+    if (cleanData && nonEmptyString(data.title)) {
       cleanData.title = data.title;
     } else {
       cleanData = null;
     }
 
     if (cleanData &&
-        data.mainImg && typeof data.mainImg === "string") {
-      cleanData.mainImg = data.mainImg;
+        data.mainImg && typeof data.mainImg === "object") {
+
+      let { basic, big, mid, small, xsmall } = data.mainImg;
+      cleanData.mainImg = {};
+      if (nonEmptyString(basic)) {
+        // We need at least the basic version
+        cleanData.mainImg.basic = basic;
+        cleanData.mainImg.big = nonEmptyString(big) ? big : undefined;
+        cleanData.mainImg.mid = nonEmptyString(mid) ? mid : undefined;
+        cleanData.mainImg.small = nonEmptyString(small) ? small : undefined;
+        cleanData.mainImg.xsmall = nonEmptyString(xsmall) ? xsmall : undefined;
+      } else {
+        cleanData = null;
+      }
     } else {
       cleanData = null;
     }
@@ -80,15 +96,13 @@ const appData = {
       cleanData = null;
     }
 
-    if (cleanData &&
-        data.author && typeof data.author === "string") {
+    if (cleanData && nonEmptyString(data.author)) {
       cleanData.author = data.author;
     } else {
       cleanData = null;
     }
     
-    if (cleanData &&
-        data.thumbnail && typeof data.thumbnail === "string") {
+    if (cleanData && nonEmptyString(data.thumbnail)) {
       cleanData.thumbnail = data.thumbnail;
     } else {
       cleanData = null;
@@ -100,8 +114,7 @@ const appData = {
   _sanitizePost(data) {
     let cleanData = this._sanitizePostListItem(data);
 
-    if (cleanData &&
-        data.body && typeof data.body === "string") {
+    if (cleanData && nonEmptyString(data.body)) {
       cleanData.body = data.body;
     } else {
       cleanData = null;

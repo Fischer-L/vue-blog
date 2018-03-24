@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { getBestFitMainImg } from "../../tools/utils";
 
 export default {
   name: "PromoPost",
@@ -20,13 +21,14 @@ export default {
   props: {
     id: String,
     title: String,
-    mainImg: String
+    mainImg: Object
   },
 
   data() {
+    let url = getBestFitMainImg(window, this.mainImg);
     return {
       styleObject: {
-        backgroundImage: `url(${this.mainImg})`
+        backgroundImage: `url(${encodeURI(url)})`
       },
       postLink: `/posts/${this.id}`,
     }

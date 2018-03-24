@@ -14,6 +14,7 @@
 
 <script>
 import AuthorBlock from "./AuthorBlock";
+import { getBestFitMainImg } from "../../tools/utils";
 
 export default {
   name: "PostItem",
@@ -26,11 +27,10 @@ export default {
   },
 
   data() {
-    // Encode URI for safety.
-    let imgLink = encodeURI(this.item.mainImg);
+    let url = getBestFitMainImg(window, this.item.mainImg);
     return {
       styleObject: {
-        backgroundImage: `url(${imgLink})`
+        backgroundImage: `url(${encodeURI(url)})`
       },
       postLink: `/posts/${this.item.id}`,
     }
