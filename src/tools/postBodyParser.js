@@ -1,3 +1,5 @@
+import { doItLater } from "./utils";
+
 const postBodyParser = {
 
   /**
@@ -37,19 +39,19 @@ const postBodyParser = {
             }
 
             if (tag === "a") {
-              if (elm.href.indexOf("javascript") !== 0) {
-                pendingElmP.children.push({
-                  tagName: "a",
-                  href: elm.href,
-                  textContent: elm.textContent
-                });
-              } else {
+              if (elm.href.indexOf("javascript") === 0) {
                 // Watch out! We see a `javascript` scripting url!
                 // It's very unsafe so turn this into a <span>.
                 tag = "span";
                 elm = {
                   textContent: elm.textContent
                 };
+              } else {
+                pendingElmP.children.push({
+                  tagName: "a",
+                  href: elm.href,
+                  textContent: elm.textContent
+                });
               }
             }
 
@@ -84,19 +86,20 @@ const postBodyParser = {
         ++currentIdx;
         ++loopCount;
       }
-      // Don't forget the last <p> if existed.
-      if (pendingElmP) {
-        article.children.push(pendingElmP);
-        pendingElmP = null;
-      }
 
       if (currentIdx < count) {
         // OK, there are more elements out there to loop but 
         // we've already looped long enough. Let's pause and continue in the next tick.
-        window.requestAnimationFrame(() => {
+        doItLater(window, () => {
           buildArticle(resolve, article, elms, count, currentIdx, MAX_LOOP_COUNT, pendingElmP);
         });
         return;
+      }
+
+      // Don't forget the last <p> if existed.
+      if (pendingElmP) {
+        article.children.push(pendingElmP);
+        pendingElmP = null;
       }
       resolve(article);
     }
@@ -180,7 +183,7 @@ const postBodyParser = {
       // DOMParser is safe because no script would be executed.
       let doc = (new DOMParser()).parseFromString(postBody, "text/html");
       if (doc && doc.body) {
-        // For safety concern, shoudln't use the parsed content from the outside directly.
+        // For safety concern, shouldn't use the parsed content from the outside directly.
         // Let's build our virtual article element.
         article = await this._buildArticleFromDOM(doc.body);
       }

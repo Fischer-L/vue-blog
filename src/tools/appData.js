@@ -1,12 +1,7 @@
 import Dexie from "dexie";
+import { doItLater } from "./utils";
 import * as dummy from "../../static/dummyData.js";
 
-function doItLater(task) {
-  // This is for the case we want to use `requestIdleCallback`
-  // but it got less support than `requestAnimationFrame` so...
-  let later = window.requestIdleCallback || window.requestAnimationFrame;
-  later(task);
-}
 
 function nonEmptyString(s) {
   return s && typeof s === "string";
@@ -29,7 +24,7 @@ const postsDB = {
 
   set(post) { 
     if (post) {
-      doItLater(() => this._db.posts.put(Object.assign({}, post)));
+      doItLater(window, () => this._db.posts.put(Object.assign({}, post)));
     }
   },
 
@@ -183,7 +178,7 @@ const appData = {
 
   get(key, params = {}) {
     return new Promise(resolve => {
-      doItLater(async () => {
+      doItLater(window, async () => {
         let data = null;
         
         if (key === "post" && params.id) {

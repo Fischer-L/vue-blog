@@ -1,4 +1,4 @@
-// This utils.js stores the useful utility functions across components
+// This utils.js stores the useful utility functions across scripts
 function matchScreenSize(window, sizeType) {
   let mediaTypes = {
     big: "(min-width: 1024px)",
@@ -21,4 +21,11 @@ export function getBestFitMainImg(window, mainImg) {
     }
   }
   return best;
+}
+
+export function doItLater(window, task) {
+  // This is for the case we want to use `requestIdleCallback`
+  // but it got less support than `requestAnimationFrame` so...
+  let later = window.requestIdleCallback || window.requestAnimationFrame;
+  later(task);
 }
