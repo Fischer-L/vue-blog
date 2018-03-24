@@ -8,6 +8,12 @@ function doItLater(task) {
   later(task);
 }
 
+// OK, we only save posts locally, why?
+// Posts shouldn't change once written. They are static.
+// However, the post list and the promotion posts may be changed
+// because of the server settings. These are dynamical.
+// We may save the post list and the promotion posts locally
+// once we got some policy here in the future.
 const postsDB = {
   _db: new Dexie("vueBlog_db"),
 
@@ -17,14 +23,20 @@ const postsDB = {
     });
   },
 
-  set(post) { return;
+  set(post) { 
     if (post) {
       doItLater(() => this._db.posts.put(Object.assign({}, post)));
     }
   },
 
-  async get(id) { return;
-    return null;
+  async get(id) {
+    let post = null;
+    try {
+      post = await this._db.posts.get({ id });
+    } catch(e) {
+      console.error(e);
+    }
+    return post || null;
   }
 };
 postsDB.init();
@@ -104,7 +116,7 @@ const appData = {
     if (!data) {
       return null;
     }
-    
+
     let cleanData = null;
     switch (key) {
       case "post":
@@ -132,6 +144,8 @@ const appData = {
     return cleanData;
   },
 
+  // The _fetch in charge of go out to the network to fetch data.
+  // Although now we use the local dummy data, still should see it as an async method.
   async _fetch(key, params = {}) {
     let data = null;
     switch (key) {
@@ -171,7 +185,6 @@ const appData = {
             postsDB.set(data);
           }
         }
-        console.log("TMP> key, data", key, data);
         resolve(data);
       });
     });
