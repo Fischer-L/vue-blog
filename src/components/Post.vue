@@ -119,7 +119,8 @@ export default {
     window.scrollTo(0, 0);
     // We try to update the fected data when our component is ready.
     window.requestAnimationFrame(async () => {
-      this.postList = await dataFetcher.getPostList();
+      let postList = await dataFetcher.getPostList();
+      this.postList = postList.filter(p => p.id !== this.id);
     });
     window.requestAnimationFrame(async () => {
       let postData = await dataFetcher.getPost();

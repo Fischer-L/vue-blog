@@ -6,8 +6,8 @@
         ></PromoPost>
       </div>
       <div class="swiper-pagination"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      <div v-on:mouseup="onClickSwiper" class="swiper-button-next"></div>
+      <div v-on:mouseup="onClickSwiper" class="swiper-button-prev"></div>
   </div>
 </template>
 
@@ -16,6 +16,9 @@ import "swiper/dist/css/swiper.min.css";
 
 import Swiper from "swiper";
 import PromoPost from "./PromoPost"
+
+const MS_SLIDE_SPEED = 1400;
+const MS_NEXT_SLIDE_SCHEDULE = 8000;
 
 export default {
   name: "PromoPostsContainer",
@@ -31,8 +34,41 @@ export default {
     PromoPost
   },
 
+  methods: {
+    _scheduleNextSlide() {
+      if (this._nextSlideTimer) {
+        return;
+      }
+      this._nextSlideTimer = window.setTimeout(() => {
+        if (this._swiper.isEnd) {
+          this._swiper.slideTo(0, MS_SLIDE_SPEED);
+        } else {
+          this._swiper.slideNext(MS_SLIDE_SPEED); 
+        }
+        this._nextSlideTimer = null;
+        this._scheduleNextSlide();
+      }, 8000);
+    },
+
+    _unscheduleNextSlide() {
+      if (this._nextSlideTimer) {
+        window.clearTimeout(this._nextSlideTimer);
+        this._nextSlideTimer = null;
+      }
+    },
+
+    onClickSwiper() {
+      // When users explicitly click the next/previous promo post,
+      // in order not to bother users, we unschedule right away and
+      // wait for at least 10s to schedule next one.
+      this._unscheduleNextSlide();
+      window.setTimeout(() => this._scheduleNextSlide(),
+        MS_NEXT_SLIDE_SCHEDULE + 10000);
+    },
+  },
+
   mounted() {
-    let swiper = new Swiper(".swiper-container", {
+    this._swiper = new Swiper(".swiper-container", {
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -40,8 +76,10 @@ export default {
       pagination: {
         el: ".swiper-pagination",
       },
-      autoHeight: true
+      autoHeight: true,
+      speed: MS_SLIDE_SPEED,
     });
+    this._scheduleNextSlide();
   }
 }
 </script>
