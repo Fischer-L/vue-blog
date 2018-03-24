@@ -1,11 +1,11 @@
 <template>
   <nav class="vueBlog-navbar navbar navbar-expand-md fixed-top">
     <ul class="vueBlog-navbar-nav navbar-nav mr-auto position-relative">
-      <li v-on:click="onClickMainNav" class="vueBlog-nav-item vueBlog-nav-item-main nav-item nav-item-main">
+      <li v-on:mouseup="onClickMainNav" class="vueBlog-nav-item vueBlog-nav-item-main nav-item nav-item-main">
         <router-link to="/" class="vueBlog-app-link vueBlog-font-logo">VueBlog</router-link>
       </li>
       <router-link to="/posts" class="vueBlog-app-link">
-        <li v-on:click="onClickPostsNav" class="vueBlog-nav-item vueBlog-nav-item-posts nav-item nav-item-posts align-middle position-absolute">
+        <li v-on:mouseup="onClickPostsNav" class="vueBlog-nav-item vueBlog-nav-item-posts nav-item nav-item-posts align-middle position-absolute">
           Posts
         </li>
       </router-link>
