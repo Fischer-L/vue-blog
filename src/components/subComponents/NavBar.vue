@@ -70,7 +70,6 @@ export default {
   border-radius: 4px;
   border: 1px solid $vueBlog-nav-item-posts-color;
   color: $vueBlog-nav-item-posts-color;
-  font-family: PlexMono-L;
   font-size: 0.9em;
   right: 1em;
   top: 50%;

@@ -41,25 +41,13 @@ export default {
   src: url(assets/fonts/PlayfairDisplay-Black.ttf) format("truetype");
 }
 
-@font-face{
-  font-family: PlexMono-L;
-  src: url(assets/fonts/IBMPlexMono-Light.woff2) format("woff2"),
-       url(assets/fonts/IBMPlexMono-Light.woff) format("woff");
-}
-
-@font-face{
-  font-family: PlexMono-R;
-  src: url(assets/fonts/IBMPlexMono-Regular.woff2) format("woff2"),
-       url(assets/fonts/IBMPlexMono-Regular.woff) format("woff");
-}
-
 html, body {
   height: 100%;
   font-size: 16px;
 }
 
 #app {
-  font-family: PlexMono-R;
+  font-family: serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
