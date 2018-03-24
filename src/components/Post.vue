@@ -1,8 +1,12 @@
 <template>
   <div id="app-post">
-    <section class="vueBlog-article vueBlog-content-area">
-      <Article v-if="!!post === true" :post="post"></Article>
-      <div v-else>No Article</div>
+    <section v-bind:class="{ found404: found404 }" class="vueBlog-article vueBlog-content-area">
+      <Article v-if="!!post === true && !found404" :post="post"></Article>
+      <div class="vueBlog-no-article">
+        <img class="vueBlog-no-article-coffe d-flex" src="../assets/img/coffe.svg" />
+        <h4 class="vueBlog-no-article-msg-main vueBlog-font-logo font-italic">The article dose not exist or was removed</h4>
+        <h4>More articles out there</h4>
+      </div>
     </section>
     <footer class="vueBlog-post-footer">
       <div class="vueBlog-content-area">
@@ -67,6 +71,7 @@ export default {
     return {
       post: null,
       postList: [],
+      found404: false,
     };
   },
 
@@ -104,8 +109,10 @@ export default {
         let article = await postBodyParser.parse(postData.body);
         if (article) {
           this.post = Object.assign({ article }, postData);
+          return;
         }
       }
+      this.found404 = true;
     });
   },
 
@@ -114,6 +121,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.vueBlog-article.found404 {
+  // We want our "More articles out there" message
+  // not far away from the post list below
+  padding-bottom: 0;
+}
+
+.vueBlog-article.found404 > .vueBlog-no-article {
+  display: block
+}
+
+.vueBlog-no-article {
+  padding-top: 2em;
+  display: none;
+}
+
+.vueBlog-no-article-coffe {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.vueBlog-no-article-msg-main {
+  margin-bottom: 2em;
+}
 
 .vueBlog-post-footer {
   background: #f9f9f9;

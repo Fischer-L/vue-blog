@@ -58,6 +58,10 @@ html, body {
   color: $app-color;
 }
 
+.vueBlog-font-logo {
+  font-family: Playfair-B;
+}
+
 .vueBlog-content-area {
   width: get-var("app-width");
   max-width: get-var("app-max-width");

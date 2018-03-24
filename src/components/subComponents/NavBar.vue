@@ -2,7 +2,7 @@
   <nav class="vueBlog-navbar navbar navbar-expand-md fixed-top">
     <ul class="vueBlog-navbar-nav navbar-nav mr-auto">
       <li class="vueBlog-nav-item vueBlog-nav-item-main nav-item nav-item-main">
-        <router-link to="/" class="vueBlog-app-link">VueBlog</router-link>
+        <router-link to="/" class="vueBlog-app-link vueBlog-font-logo">VueBlog</router-link>
       </li>
       <router-link to="/posts" class="vueBlog-app-link">
         <li class="vueBlog-nav-item vueBlog-nav-item-posts nav-item nav-item-posts align-middle">
@@ -46,7 +46,6 @@ export default {
   line-height: $app-nav-bar-height * 0.7;
   margin: 0 auto;
   font-size: 1.1em;
-  font-family: Playfair-B;
 }
 
 .vueBlog-nav-item-posts {
