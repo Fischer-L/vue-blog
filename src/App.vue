@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="h-100">
     <NavBar />
-    <router-view />
+    <router-view :key="routerKey" />
   </div>
 </template>
 
@@ -15,8 +15,16 @@ export default {
     NavBar
   },
 
+  computed: {
+    routerKey() {
+      let name = this.$route.name;
+      let id = this.$route.params.id || "";
+      return name + id;
+    }
+  },
+
   // Life cyle listeners
-  beforeCreate() {
+  mounted() {
     // Make sure a right start position
     window.scrollTo(0, 0);
   },

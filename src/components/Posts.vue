@@ -50,8 +50,6 @@ export default {
   // Life cyle listeners
 
   beforeCreate() {
-    // Make sure a right start position
-    window.scrollTo(0, 0);
     // We go fetching data as early as possible,
     // but don't update the fected data right away so
     // we don't block the Vue component's lifecycle or
@@ -60,6 +58,8 @@ export default {
   },
 
   mounted() {
+    // Make sure a right start position
+    window.scrollTo(0, 0);
     // We try to update the fected data when our component is ready.
     window.requestAnimationFrame(async () => {
       this.postList = await dataFetcher.getPostList();
