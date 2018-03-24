@@ -24,11 +24,11 @@ import postBodyParser from "../tools/postBodyParser";
 
 // See the Home component for why a dataFetcher object.
 const dataFetcher = {
-  postListPromise: null,
+  _postListPromise: null,
 
   fetchPostList() {
-    if (!this.postListPromise) {
-      this.postListPromise = new Promise(async resolve => {
+    if (!this._postListPromise) {
+      this._postListPromise = new Promise(async resolve => {
         let data = await appData.get("postList");
         if (!data) {
           resolve([]);
@@ -37,14 +37,23 @@ const dataFetcher = {
         }
       });
     }
-    return this.postListPromise;
+    return this._postListPromise;
   },
 
-  postPromise: {},
+  async getPostList() {
+    let list = null;
+    if (this._postListPromise) {
+      list = await this._postListPromise;
+      this._postListPromise = null;
+    }
+    return list;
+  },
+
+  _postPromise: null,
 
   fetchPost(id) {
-    if (!this.postPromise[id]) {
-      this.postPromise[id] = new Promise(async resolve => {
+    if (!this._postPromise) {
+      this._postPromise = new Promise(async resolve => {
         let data = await appData.get("post", { id });
         if (!data) {
           resolve(null);
@@ -53,7 +62,16 @@ const dataFetcher = {
         }
       });
     }
-    return this.postPromise[id];
+    return this._postPromise;
+  },
+
+  async getPost() {
+    let post = null;
+    if (this._postPromise) {
+      post = await this._postPromise;
+      this._postPromise = null;
+    }
+    return post;
   },
 };
 
@@ -101,10 +119,10 @@ export default {
   mounted() {
     // We try to update the fected data when our component is ready.
     window.requestAnimationFrame(async () => {
-      this.postList = await dataFetcher.postListPromise;
+      this.postList = await dataFetcher.getPostList();
     });
     window.requestAnimationFrame(async () => {
-      let postData = await dataFetcher.postPromise[this.id];
+      let postData = await dataFetcher.getPost();
       if (postData) {
         let article = await postBodyParser.parse(postData.body);
         if (article) {

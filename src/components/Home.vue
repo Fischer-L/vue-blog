@@ -43,12 +43,16 @@ const dataFetcher = {
     }
   },
 
-  getData(type) {
+  async getData(type) {
+    let data = null;
     if ((type === "postList" || type === "promoPosts") &&
         this._fetchPromises && this._fetchPromises[type]) {
-      return this._fetchPromises[type];
+      data = await this._fetchPromises[type];
+      // Important to release promises or a leak may happen.
+      // Pages shouldn't cache the result. It is the appData's job.
+      this._fetchPromises[type] = null;
     }
-    return Promise.resolve(null);
+    return data;
   },
 };
 

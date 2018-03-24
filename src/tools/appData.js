@@ -110,7 +110,7 @@ const appData = {
     return cleanData;
   },
 
-  // Somwwhere in our app, there must be a place doing this job
+  // Somewhere in our app, there must be a place doing this job
   // and this is that place.
   _sanitizeData(key, data) {
     if (!data) {
@@ -144,7 +144,7 @@ const appData = {
     return cleanData;
   },
 
-  // The _fetch in charge of go out to the network to fetch data.
+  // The _fetch in charge of going out to the network to fetch data.
   // Although now we use the local dummy data, still should see it as an async method.
   async _fetch(key, params = {}) {
     let data = null;

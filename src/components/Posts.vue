@@ -24,6 +24,15 @@ const dataFetcher = {
     }
     return this.postListPromise;
   },
+
+  async getPostList() {
+    let list = null;
+    if (this.postListPromise) {
+      list = await this.postListPromise;
+      this.postListPromise = null;
+    }
+    return list;
+  }
 };
 
 export default {
@@ -53,7 +62,7 @@ export default {
   mounted() {
     // We try to update the fected data when our component is ready.
     window.requestAnimationFrame(async () => {
-      this.postList = await dataFetcher.postListPromise;
+      this.postList = await dataFetcher.getPostList();
     });
   },
 
