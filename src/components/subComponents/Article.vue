@@ -90,7 +90,9 @@ export default {
             children.push(createElement("img", {
               attrs: {
                 class: "vueBlog-article-body-img d-block",
-                src: encodeURI(elm.src)
+                src: encodeURI(elm.src),
+                srcset: elm.srcset,
+                sizes: elm.sizes
               }
             }));
             break;

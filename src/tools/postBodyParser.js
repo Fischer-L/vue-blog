@@ -16,6 +16,12 @@ const postBodyParser = {
     // This is a helping function to let us divide jobs into batches
     // so we will not blocking the main thread.
     function buildArticle(resolve, article, elms, count, currentIdx, MAX_LOOP_COUNT, pendingElmP) {
+      const dataSrcset = [
+        "srcsetBig", "srcsetMid", "srcsetSmall", "srcsetXsmall"
+      ];
+      const dataSizes = [
+        "sizesBig", "sizesMid", "sizesSmall", "sizesXsmall"
+      ];
       let loopCount = 0
       while (currentIdx < count && loopCount < MAX_LOOP_COUNT) {
         let elm = elms[currentIdx];
@@ -63,9 +69,13 @@ const postBodyParser = {
             }
             
             if (tag === "img") {
+              let srcset = dataSrcset.map(set => elm.dataset[set]).join(",");
+              let sizes = dataSizes.map(size => elm.dataset[size]).join(",");
               article.children.push({
                 tagName: "img",
-                src: elm.src
+                src: elm.src,
+                srcset,
+                sizes,
               });
             }
             break;
@@ -132,6 +142,12 @@ const postBodyParser = {
    *       
    *       // Corresponding to the <img> element's src property
    *       src: "https://foo.com/bar.jpg"
+   *
+   *       // Corresponding to the <img> element's srcset property
+   *       srcset: "https://foo.com/bar_1024.jpg 1024w, https://foo.com/bar_768.jpg 768w"
+   *
+   *       // Corresponding to the <img> element's sizes property
+   *       sizes: "(min-width: 1024px) 1024px, (min-width: 768px) 768px"
    *     }
    *   ]  
    * }
