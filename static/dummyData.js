@@ -5,7 +5,7 @@ const ROOT_PATH = "http://localhost:8080/static/";
 const posts = [
   {
     id: "0",
-    author: "Ami Carey",
+    author: "Ami Casey",
     time: 1521822580304,
     thumbnail: ROOT_PATH + "author_0.png",
     title: "My Bathroom Mirror Is Smarter Than Yours",
@@ -180,15 +180,15 @@ const posts = [
   },
   {
     id: "3",
-    author: "Casey Beth",
+    author: "Muira Cammon",
     time: 1521040202415,
-    thumbnail: ROOT_PATH + "author_0.png",
-    title: "My Bathroom Mirror Is Smarter Than Yours",
+    thumbnail: ROOT_PATH + "author_3.jpg",
+    title: "Eighteen Unique Places to Go in the Bay Area in 2018",
     mainImg: {
-      basic: ROOT_PATH + "post_0_main.jpg",
-      big: ROOT_PATH + "post_0_main.jpg",
-      mid: ROOT_PATH + "post_0_main.jpg",
-      small: ROOT_PATH + "post_0_main.jpg",
+      basic: ROOT_PATH + "post_3_main.jpg",
+      big: ROOT_PATH + "post_3_main.jpg",
+      mid: ROOT_PATH + "post_3_main.jpg",
+      small: ROOT_PATH + "post_3_main.jpg",
     },
     body: `
       <span>Sometime late last year I realized that I wanted my ordinary bathroom mirror to be more like the future we were promised in the movies.There doesn’t seem to be anyone selling the product I was looking for. The individual parts, however, were fairly easy to get. A number of people have done similar custom builds recently, but I had something different in mind. So I ordered myself a </span>
@@ -236,13 +236,13 @@ const posts = [
   },
   {
     id: "4",
-    author: "Linus Borg",
+    author: "Tedd Floersch",
     time: 1520781090899,
-    thumbnail: ROOT_PATH + "author_1.jpg",
-    title: "Should You Leave SF for Austin? Meh, Perhaps Not",
+    thumbnail: ROOT_PATH + "author_4.png",
+    title: "Taipei Ethereum Meetup: Sharding, Scaling and Solutions",
     mainImg: {
-      basic: ROOT_PATH + "post_1_main.jpg",
-      small: ROOT_PATH + "post_1_main.jpg",
+      basic: ROOT_PATH + "post_4_main.jpg",
+      small: ROOT_PATH + "post_4_main.jpg",
     },
     body: `
       <span>Imoved to San Francisco just shy of a year ago, bright-eyed and brimming with foolish optimism, like most other people who end up in this city. A copywriting contract in a posh Financial District office and a healthy uptick in my regular magazine work represented, in my mind, the equivalent of an Oprah “aha!” moment—not much could convince me that I shouldn’t make the 28-hour journey west from my home in Austin, Texas.</span>
@@ -290,14 +290,14 @@ const posts = [
   },
   {
     id: "5",
-    author: "Anne Hathaway",
+    author: "Meg Furey",
     time: 1520694752305,
-    thumbnail: ROOT_PATH + "author_2.jpg",
-    title: "I Am The Nameless African From Your Last Instagram Post",
+    thumbnail: ROOT_PATH + "author_5.jpg",
+    title: "So You’re Moving to San Jose",
     mainImg: {
-      basic: ROOT_PATH + "post_2_main.jpg",
-      mid: ROOT_PATH + "post_2_main.jpg",
-      xsmall: ROOT_PATH + "post_2_main.jpg",
+      basic: ROOT_PATH + "post_5_main.jpg",
+      mid: ROOT_PATH + "post_5_main.jpg",
+      xsmall: ROOT_PATH + "post_5_main.jpg",
     },
     body: `
       <span>Hey there. It’s me, the nameless African woman from your last Instagram post.</span>
