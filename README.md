@@ -20,6 +20,8 @@
 
 2. 執行 `npm run build` 或 `yarn build` 會建置專案，JS, CSS, HTML 皆會被 minified 於 ./dist 目錄下
 
+3. 測試資料與圖片置於 ./static 下
+
 ## 遇到困難
 基本上功能需求都有完成，但還是可以說明一下碰到的問題
 
