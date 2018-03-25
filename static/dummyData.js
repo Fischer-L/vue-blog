@@ -189,7 +189,6 @@ const posts = [
       big: ROOT_PATH + "post_0_main.jpg",
       mid: ROOT_PATH + "post_0_main.jpg",
       small: ROOT_PATH + "post_0_main.jpg",
-      xsmall: ROOT_PATH + "post_0_main.jpg",
     },
     body: `
       <span>Sometime late last year I realized that I wanted my ordinary bathroom mirror to be more like the future we were promised in the movies.There doesn’t seem to be anyone selling the product I was looking for. The individual parts, however, were fairly easy to get. A number of people have done similar custom builds recently, but I had something different in mind. So I ordered myself a </span>
@@ -207,8 +206,6 @@ const posts = [
            data-sizes-mid="(min-width: 768px) 768px"
            data-srcset-small="http://localhost:8080/static/post_0_pic1.jpg 414w"
            data-sizes-small="(min-width: 414px) 414px"
-           data-srcset-xsmall="http://localhost:8080/static/post_0_pic1.jpg 320w"
-           data-sizes-xsmall="(min-width: 320px) 320px"
       />
       <span>Welcome to my bathroom. Please excuse the carefully arranged mess around the medicine cabinet and its pristine mirror surface. To the right of where my face would be we have the time and date. To the left is the current weather and a 24-hour forecast. Below are some recent news headlines. Here’s a close-up of that area:</span>
       <br />
@@ -223,8 +220,6 @@ const posts = [
            data-sizes-mid="(min-width: 768px) 768px"
            data-srcset-small="http://localhost:8080/static/post_0_pic2.jpg 414w"
            data-sizes-small="(min-width: 414px) 414px"
-           data-srcset-xsmall="http://localhost:8080/static/post_0_pic2.jpg 320w"
-           data-sizes-xsmall="(min-width: 320px) 320px"
       />
       <span>This prototype is still a work in progress and I haven’t spent much time on the software yet. The UI above is only a few hundred lines of code and I’m experimenting with different devices to run it—initially Chromecast, then Nexus Player, and most recently Fire TV Stick. That means until I settle on a platform and clean up the electronics it does look a little bit messy when you peek inside:</span>
       <img src='http://localhost:8080/static/post_0_pic3.jpg'
@@ -235,8 +230,6 @@ const posts = [
            data-sizes-mid="(min-width: 768px) 768px"
            data-srcset-small="http://localhost:8080/static/post_0_pic3.jpg 414w"
            data-sizes-small="(min-width: 414px) 414px"
-           data-srcset-xsmall="http://localhost:8080/static/post_0_pic3.jpg 320w"
-           data-sizes-xsmall="(min-width: 320px) 320px"
       />
       <span>And that’s where I am with this project so far. Looking forward to realizing some of the remaining ideas. Maybe I’ll post a more detailed making-of with the pictures I took during the build.</span>
     `
@@ -249,10 +242,7 @@ const posts = [
     title: "Should You Leave SF for Austin? Meh, Perhaps Not",
     mainImg: {
       basic: ROOT_PATH + "post_1_main.jpg",
-      big: ROOT_PATH + "post_1_main.jpg",
-      mid: ROOT_PATH + "post_1_main.jpg",
       small: ROOT_PATH + "post_1_main.jpg",
-      xsmall: ROOT_PATH + "post_1_main.jpg",
     },
     body: `
       <span>Imoved to San Francisco just shy of a year ago, bright-eyed and brimming with foolish optimism, like most other people who end up in this city. A copywriting contract in a posh Financial District office and a healthy uptick in my regular magazine work represented, in my mind, the equivalent of an Oprah “aha!” moment—not much could convince me that I shouldn’t make the 28-hour journey west from my home in Austin, Texas.</span>
@@ -268,8 +258,6 @@ const posts = [
            data-sizes-big="(min-width: 1024px) 1024px"
            data-srcset-mid="http://localhost:8080/static/post_1_pic1.jpg 768w"
            data-sizes-mid="(min-width: 768px) 768px"
-           data-srcset-small="http://localhost:8080/static/post_1_pic1.jpg 414w"
-           data-sizes-small="(min-width: 414px) 414px"
            data-srcset-xsmall="http://localhost:8080/static/post_1_pic1.jpg 320w"
            data-sizes-xsmall="(min-width: 320px) 320px"
       />
@@ -282,8 +270,6 @@ const posts = [
            data-sizes-big="(min-width: 1024px) 1024px"
            data-srcset-mid="http://localhost:8080/static/post_1_pic2.jpg 768w"
            data-sizes-mid="(min-width: 768px) 768px"
-           data-srcset-small="http://localhost:8080/static/post_1_pic2.jpg 414w"
-           data-sizes-small="(min-width: 414px) 414px"
            data-srcset-xsmall="http://localhost:8080/static/post_1_pic2.jpg 320w"
            data-sizes-xsmall="(min-width: 320px) 320px"
       />
@@ -296,8 +282,6 @@ const posts = [
            data-sizes-big="(min-width: 1024px) 1024px"
            data-srcset-mid="http://localhost:8080/static/post_1_pic3.jpg 768w"
            data-sizes-mid="(min-width: 768px) 768px"
-           data-srcset-small="http://localhost:8080/static/post_1_pic3.jpg 414w"
-           data-sizes-small="(min-width: 414px) 414px"
            data-srcset-xsmall="http://localhost:8080/static/post_1_pic3.jpg 320w"
            data-sizes-xsmall="(min-width: 320px) 320px"
       />
@@ -312,9 +296,7 @@ const posts = [
     title: "I Am The Nameless African From Your Last Instagram Post",
     mainImg: {
       basic: ROOT_PATH + "post_2_main.jpg",
-      big: ROOT_PATH + "post_2_main.jpg",
       mid: ROOT_PATH + "post_2_main.jpg",
-      small: ROOT_PATH + "post_2_main.jpg",
       xsmall: ROOT_PATH + "post_2_main.jpg",
     },
     body: `
@@ -324,8 +306,6 @@ const posts = [
       <span>.” I had a quick look around your account; you posted our selfie after your close-up shot of our dearly departed Sudan the rhinoceros (love that you called for a moment of silence for the majestic beast — will you do the same after I pass away?), but before the panoramic sunset photo with the silhouette of an acacia tree. Great job on the caption, by the way; Serengeti does indeed mean “endless plain” in the Maasai language.</span>
       <img src='http://localhost:8080/static/post_2_pic1.jpg'
            data-comments="All sizes uses the same image? Come on, this is local dummy test..."
-           data-srcset-big="http://localhost:8080/static/post_2_pic1.jpg 1024w"
-           data-sizes-big="(min-width: 1024px) 1024px"
            data-srcset-mid="http://localhost:8080/static/post_2_pic1.jpg 768w"
            data-sizes-mid="(min-width: 768px) 768px"
            data-srcset-small="http://localhost:8080/static/post_2_pic1.jpg 414w"
@@ -339,8 +319,6 @@ const posts = [
       <span>Why ask me questions anyway, when that article you read on the plane already told you everything you need to know about my community? You know what our houses look like, what our primitive diets consist of, our literacy rates, our recent troubles, our surprising resilience. I could see in your eyes that you didn’t know what to do with your immense guilt upon meeting me. You’re dreaming about “becoming successful, having a big family in a big house in a beautiful country,” while I’m rotting away “alone with my child in my small house made of mud and trees.” I re-lived the guilt you felt (we Africans are deeply compassionate) when I read your Instagram post. You’re right, we are poor but happy.</span>
       <img src='http://localhost:8080/static/post_2_pic2.jpg'
            data-comments="All sizes uses the same image? Come on, this is local dummy test..."
-           data-srcset-big="http://localhost:8080/static/post_2_pic2.jpg 1024w"
-           data-sizes-big="(min-width: 1024px) 1024px"
            data-srcset-mid="http://localhost:8080/static/post_2_pic2.jpg 768w"
            data-sizes-mid="(min-width: 768px) 768px"
            data-srcset-small="http://localhost:8080/static/post_2_pic2.jpg 414w"

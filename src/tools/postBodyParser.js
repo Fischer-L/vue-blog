@@ -18,7 +18,7 @@ const postBodyParser = {
     // This is a helping function to let us divide jobs into batches
     // so we will not blocking the main thread.
     function buildArticle(resolve, article, elms, count, currentIdx, MAX_LOOP_COUNT, pendingElmP) {
-      const dataSrcset = [
+      const dataSrcsets = [
         "srcsetBig", "srcsetMid", "srcsetSmall", "srcsetXsmall"
       ];
       const dataSizes = [
@@ -71,8 +71,19 @@ const postBodyParser = {
             }
             
             if (tag === "img") {
-              let srcset = dataSrcset.map(set => elm.dataset[set]).join(",");
-              let sizes = dataSizes.map(size => elm.dataset[size]).join(",");
+              let srcset = dataSrcsets.reduce((srcset, set) => {
+                if (elm.dataset[set]) {
+                  srcset.push(elm.dataset[set]);
+                }
+                return srcset;
+              }, []).join(",");
+              let sizes = dataSizes.reduce((sizes, size) => {
+                if (elm.dataset[size]) {
+                  sizes.push(elm.dataset[size]);
+                }
+                return sizes;
+              }, []).join(",");
+
               article.children.push({
                 tagName: "img",
                 src: elm.src,

@@ -2,7 +2,6 @@ import Dexie from "dexie";
 import { doItLater } from "./utils";
 import * as dummy from "../../static/dummyData.js";
 
-
 function nonEmptyString(s) {
   return s && typeof s === "string";
 }
@@ -41,7 +40,92 @@ const postsDB = {
 postsDB.init();
 
 // this `appData` in charge of providing the data for our app's use.
-// Currently, mainly, the data is posts.
+// Currently, mainly, the data are posts and we assume data passed from
+// the server as below:
+//
+// Post: {
+// 
+//   id: String. The post unique id,
+// 
+//   author: String. The post author name,
+//   
+//   time: Number. The post publish time in MS since January 1, 1970, 00:00:00,
+//   
+//   thumbnail: String. The author's thumbnail img url,
+//   
+//   title: String. The post title,
+//   
+//   // The main img is the img highlighting this post, will
+//   // be used on promoting, listing the post and so on.
+//   mainImg: {
+//     basic: String. Must, the url of the default version.
+//     big: String. Optional, the url of the version for the big srcreen device,
+//     mid: String. Optional, the url of the version for the mid srcreen device,
+//     small: String. Optional, the url of the version for the small srcreen device,
+//     xsmall: String. Optional, the url of the version for the extra small srcreen device,
+//   },
+// 
+//   // String. The body of the post.
+//   // We assume there is an post-editing page which let users write posts.
+//   // The page can let users input text, insert links and insert pictures right now.
+//   // And in our system we store the article body in the HTML format.
+//   body: `
+//     <span>............<span>
+//     <a href="https://a.com">a.com</a>
+//     <img src="https://b.com/b.jpg"
+//          // Belows are optional
+//          data-srcset-big="The srcset value for the big srcreen device"
+//          data-srcset-mid="The srcset value for the mid srcreen device"
+//          data-srcset-small="The srcset value for the small srcreen device"
+//          data-srcset-xsmall="The srcset value for the extra small srcreen device"
+//          data-sizes-big="The sizes value for the big srcreen device"
+//          data-sizes-mid="The sizes value for the mid srcreen device"
+//          data-sizes-small="The sizes value for the small srcreen device"
+//          data-sizes-xsmall="The sizes value for the extra small srcreen device" />
+//   `
+// }
+// 
+// promoPost: {
+// 
+//   id: String. The post unique id,
+//   
+//   title: String. The post title,
+//   
+//   // The main img is the img highlighting this post, will
+//   // be used on promoting, listing the post and so on.
+//   mainImg: {
+//     basic: String. Must, the url of the default version.
+//     big: String. Optional, the url of the version for the big srcreen device,
+//     mid: String. Optional, the url of the version for the mid srcreen device,
+//     small: String. Optional, the url of the version for the small srcreen device,
+//     xsmall: String. Optional, the url of the version for the extra small srcreen device,
+//   },
+// 
+// }
+// 
+// postListItem: {
+// 
+//   id: String. The post unique id,
+//   
+//   title: String. The post title,
+//   
+//   // The main img is the img highlighting this post, will
+//   // be used on promoting, listing the post and so on.
+//   mainImg: {
+//     basic: String. Must, the url of the default version.
+//     big: String. Optional, the url of the version for the big srcreen device,
+//     mid: String. Optional, the url of the version for the mid srcreen device,
+//     small: String. Optional, the url of the version for the small srcreen device,
+//     xsmall: String. Optional, the url of the version for the extra small srcreen device,
+//   },
+// 
+//   author: String. The post author name,
+//    
+//   time: Number. The post publish time in MS since January 1, 1970, 00:00:00,
+//   
+//   thumbnail: String. The author's thumbnail img url,
+// 
+// }
 const appData = {
 
   _sanitizePromoPost(data) {
