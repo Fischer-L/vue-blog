@@ -38,6 +38,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../assets/css/AppEnv";
 
 .vueBlog-promo-post {
   height: 300px;
@@ -50,6 +51,12 @@ export default {
   margin: 0;
   background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
   color: #f3f3f3;
+  font-size: 1.5em;
 }
 
+@media screen and (min-width: $app-big-screen-width) {
+  .vueBlog-promo-post-title {
+    font-size: 2em;
+  }
+}
 </style>

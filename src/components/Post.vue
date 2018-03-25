@@ -156,12 +156,12 @@ export default {
 }
 
 .vueBlog-no-article-coffe {
-  width: 20%;
+  width: 8.25em;
   margin: 0 auto;
 }
 
 .vueBlog-no-article-msg-main {
-  margin-bottom: 2em;
+  margin: 0 0.1em 2em 0.1em;
 }
 
 .vueBlog-post-footer {
